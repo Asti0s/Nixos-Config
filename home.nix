@@ -11,6 +11,8 @@
   # Home pkgs
   home.packages = with pkgs; [
     hello
+    firefox
+    kitty
   ];
 
 
