@@ -1,11 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
 
   # Experimental settings
@@ -20,6 +18,19 @@
   # Networking
   networking.hostName = "astios";
   networking.networkmanager.enable = true;
+
+
+  # Sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+
+  # System pkgs
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = with pkgs; [
+    wget
+    git
+  ];
 
 
   # Locales
@@ -52,41 +63,7 @@
     isNormalUser = true;
     description = "Astios";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
   };
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "astios" = import ./home.nix;
-    };
-  };
-
-
-  # Hyprland
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    xwayland.enable = true;
-  };
-
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSOR = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  hardware = {
-    graphics.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
-
-  # System pkgs
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    wget
-    git
-  ];
 
 
   # Nix garbage collection
@@ -99,10 +76,6 @@
 
   # Services
   services.openssh.enable = true;
-  programs.gnupg.agent = {
-    enable = true; 
-    enableSSHSupport = true;
-  };
 
 
   # System version
