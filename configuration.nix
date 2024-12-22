@@ -130,7 +130,7 @@
   # Security
   security = {
     polkit.enable = true;
-    pam.services.swaylock = {};  # If you plan to use swaylock
+    pam.services.swaylock = {};
   };
 
 
