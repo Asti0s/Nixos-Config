@@ -75,11 +75,17 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
     ];
-    config.common.default = "*";
+
+    config = {
+      common = {
+        default = ["gtk"];
+      };
+    };
   };
 
 
@@ -102,15 +108,6 @@
   };
 
 
-  # Fonts
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    liberation_ttf
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-  ];
-
-
   # Services
   services.openssh.enable = true;
   services.dbus.enable = true;
@@ -130,7 +127,6 @@
   # Security
   security = {
     polkit.enable = true;
-    pam.services.swaylock = {};
   };
 
 
