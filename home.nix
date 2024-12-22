@@ -17,6 +17,9 @@
     libnotify
     wl-clipboard
     hyprpaper
+
+    swaylock-effects
+    swayidle
   ];
 
 
@@ -33,6 +36,7 @@
         "$mod, M, exit"
         "$mod, Return, togglefloating"
         "$mod, A, exec, wofi --show drun"
+        "$mod, L, exec, swaylock"
       ];
 
       monitor = [
@@ -46,7 +50,52 @@
         "col.active_border" = "rgba(33ccffee)";
         "col.inactive_border" = "rgba(595959aa)";
       };
+
+      exec-once = [
+        "swayidle -w timeout 300 'swaylock -f' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f'"
+      ];
     };
+  };
+
+
+  # Swaylock
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      color = "000000";
+      font = "JetBrains Mono";
+      font-size = 24;
+      indicator-radius = 100;
+      indicator-thickness = 7;
+      inside-color = "00000088";
+      inside-clear-color = "00000088";
+      inside-ver-color = "00000088";
+      inside-wrong-color = "00000088";
+      key-hl-color = "880033";
+      line-color = "000000";
+      line-clear-color = "000000";
+      line-ver-color = "000000";
+      line-wrong-color = "000000";
+      ring-color = "337777";
+      ring-clear-color = "337777";
+      ring-ver-color = "337777";
+      ring-wrong-color = "550000";
+      text-color = "ffffff";
+      text-clear-color = "ffffff";
+      text-ver-color = "ffffff";
+      text-wrong-color = "ffffff";
+      };
+  };
+  services.swayidle = {
+    enable = true;
+    events = [
+      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock"; }
+      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock"; }
+    ];
+    timeouts = [
+      { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -fF"; }
+      { timeout = 600; command = "hyprctl dispatch dpms off"; resumeCommand = "hyprctl dispatch dpms on"; }
+    ];
   };
 
 

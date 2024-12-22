@@ -25,6 +25,10 @@
   environment.systemPackages = with pkgs; [
     wget
     git
+
+    wayland
+    xwayland
+    polkit_gnome
   ];
 
 
@@ -57,25 +61,36 @@
   users.users.astios = {
     isNormalUser = true;
     description = "Astios";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
   };
 
 
   # Graphics
   hardware.graphics.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = "*";
   };
 
 
   # Sound
-  pipewire = {
+  hardware.pulseaudio.enable = true;
+  services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    wireplumber.enable = true;
+    jack.enable = true;
   };
 
 
@@ -87,8 +102,36 @@
   };
 
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-emoji
+    liberation_ttf
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  ];
+
+
   # Services
   services.openssh.enable = true;
+  services.dbus.enable = true;
+  services.gvfs.enable = true;
+
+
+  # Env vars
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+  };
+
+
+  # Security
+  security = {
+    polkit.enable = true;
+    pam.services.swaylock = {};  # If you plan to use swaylock
+  };
 
 
   # System version
