@@ -20,11 +20,6 @@
   networking.networkmanager.enable = true;
 
 
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-
   # System pkgs
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
@@ -62,7 +57,25 @@
   users.users.astios = {
     isNormalUser = true;
     description = "Astios";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
+  };
+
+
+  # Graphics
+  hardware.graphics.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
+
+
+  # Sound
+  pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
   };
 
 
