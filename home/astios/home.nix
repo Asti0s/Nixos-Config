@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./firefox.nix
+  ];
+
   home.username = "astios";
   home.homeDirectory = "/home/astios";
   home.stateVersion = "24.11";
@@ -18,7 +22,6 @@
   };
 
   home.packages = with pkgs; [
-    firefox
     vscode
     discord
     nixfmt-rfc-style
