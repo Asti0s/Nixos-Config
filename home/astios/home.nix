@@ -3,6 +3,8 @@
 {
   imports = [
     ./firefox.nix
+    ./discord.nix
+    ./vscode.nix
   ];
 
   home.username = "astios";
@@ -22,7 +24,6 @@
   };
 
   home.packages = with pkgs; [
-    vscode
     discord
     nixfmt-rfc-style
     nixd
