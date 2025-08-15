@@ -24,8 +24,10 @@
   };
 
   home.packages = with pkgs; [
-    discord
     nixfmt-rfc-style
     nixd
+
+    # Softwares
+    anki
   ];
 }
