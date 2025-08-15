@@ -11,6 +11,7 @@
         "editor.renderWhitespace" = "all";
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
+        "workbench.iconTheme" = "material-icon-theme";
       };
 
       extensions = with pkgs.vscode-extensions; [
@@ -25,6 +26,7 @@
         esbenp.prettier-vscode
         dbaeumer.vscode-eslint
         tamasfe.even-better-toml
+        rust-lang.rust-analyzer
       ];
     };
   };
