@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuratior";
+  description = "NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -19,14 +19,12 @@
       nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/framework
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.astios = import ./home.nix;
-
-            home-manager.extraSpecialArgs = {
+            home-manager = {
+              backupFileExtension = "backup";
+              verbose = true;
             };
           }
         ];
