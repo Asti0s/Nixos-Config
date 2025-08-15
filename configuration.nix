@@ -1,42 +1,32 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
+  # System packages
+  environment.systemPackages = with pkgs; [
+  ];
 
   # Experimental settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
   # Networking
-  networking.hostName = "astios";
+  networking.hostName = "astios-nixos";
   networking.networkmanager.enable = true;
 
-
-  # System pkgs
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    wget
-    git
-
-    wayland
-    xwayland
-    polkit_gnome
-  ];
-
-
-  # Locales
+  # Locales / Timezone
+  console.keyMap = "fr";
   time.timeZone = "Europe/Paris";
-
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "fr_FR.UTF-8";
     LC_IDENTIFICATION = "fr_FR.UTF-8";
@@ -49,86 +39,56 @@
     LC_TIME = "fr_FR.UTF-8";
   };
 
-  services.xserver.xkb = {
-    layout = "fr";
-    variant = "azerty";
-  };
-
-  console.keyMap = "fr";
-
-
-  # User account
-  users.users.astios = {
-    isNormalUser = true;
-    description = "Astios";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" ];
-  };
-
-
-  # Graphics
-  hardware.graphics.enable = true;
-
-  programs.hyprland = {
+  # Enable the X11 windowing system.
+  services.xserver = {
     enable = true;
-    xwayland.enable = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-
-    config = {
-      common = {
-        default = ["gtk"];
-      };
+    xkb = {
+      layout = "fr";
+      variant = "";
     };
   };
 
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
-  # Sound
-  hardware.pulseaudio.enable = false;
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
 
-
-  # Nix garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  # User account
+  users.users.astios = {
+    isNormalUser = true;
+    description = "Astios";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-  # Services
-  services.openssh.enable = true;
-  services.dbus.enable = true;
-  services.gvfs.enable = true;
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
 
-  # Env vars
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    XDG_SESSION_TYPE = "wayland";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-  };
-
-
-  # Security
-  security = {
-    polkit.enable = true;
-  };
-
-
-  # System version
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }
