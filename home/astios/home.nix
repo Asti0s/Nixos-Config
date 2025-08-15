@@ -27,13 +27,6 @@
     nixfmt-rfc-style
     nixd
 
-    # Rust
-    rustc
-    cargo
-    rustfmt
-    clippy
-    rust-analyzer
-
     # Softwares
     anki
   ];
