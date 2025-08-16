@@ -9,7 +9,7 @@
 
   home.username = "astios";
   home.homeDirectory = "/home/astios";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   programs.git = {
     enable = true;

@@ -12,6 +12,7 @@
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "workbench.iconTheme" = "material-icon-theme";
+        "github.copilot.nextEditSuggestions.enabled" = true;
       };
 
       extensions = with pkgs.vscode-extensions; [

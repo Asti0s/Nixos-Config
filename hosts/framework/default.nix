@@ -7,16 +7,24 @@
     ../../nixos/users/astios.nix
   ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
   networking.hostName = "astios-nixos";
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
+  services.printing.enable = true;
 
   # System packages
   environment.systemPackages = with pkgs; [
+    wget
+    curl
+    tree
+    htop
+    unzip
+    zip
   ];
 
   # Enable the X11 windowing system.
@@ -32,11 +40,11 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # Enable CUPS to print documents && OpenSSH
-  services.printing.enable = true;
-  services.openssh.enable = true;
+  # Battery life
+  services.tlp.enable = true;
+  services.power-profiles-daemon.enable = false;
 
-  # Enable sound with pipewire.
+  # Audio
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
