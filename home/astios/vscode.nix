@@ -28,6 +28,7 @@
         dbaeumer.vscode-eslint
         tamasfe.even-better-toml
         rust-lang.rust-analyzer
+        christian-kohler.path-intellisense
       ];
     };
   };
