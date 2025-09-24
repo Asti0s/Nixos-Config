@@ -9,6 +9,7 @@
     ./zsh.nix
     ./fonts.nix
     ./git.nix
+    ./starship.nix
   ];
 
   home.username = "astios";
