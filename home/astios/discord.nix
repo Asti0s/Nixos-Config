@@ -1,12 +1,13 @@
 {
   programs.vesktop = {
     enable = true;
+
     vencord.settings.plugins = {
       MessageLogger = {
-        enabled = true;
+        enable = true;
         ignoreSelf = true;
       };
-      FakeNitro.enabled = true;
+      FakeNitro.enable = true;
       ClearUrls.enable = true;
     };
   };

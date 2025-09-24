@@ -14,17 +14,24 @@
       nixpkgs,
       home-manager,
       ...
-    }:
+    }@inputs:
     {
-      nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."framework@astios" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/framework
+          ./nixos/users/astios.nix
+          { nixpkgs.config.allowUnfree = true; }
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               backupFileExtension = "backup";
               verbose = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.astios = import ./home/astios/home.nix;
+              useGlobalPkgs = true;
+              useUserPackages = true;
             };
           }
         ];

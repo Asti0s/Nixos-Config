@@ -11,12 +11,13 @@
         "editor.renderWhitespace" = "all";
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
-        "workbench.iconTheme" = "material-icon-theme";
         "github.copilot.nextEditSuggestions.enabled" = true;
+        "workbench.colorTheme" = "Catppuccin Macchiato";
+        "workbench.iconTheme" = "catppuccin-macchiato";
+        "editor.fontFamily" = "JetBrainsMono Nerd Font";
       };
 
       extensions = with pkgs.vscode-extensions; [
-        pkief.material-icon-theme
         jnoortheen.nix-ide
         bbenoist.nix
         github.copilot
@@ -29,6 +30,8 @@
         tamasfe.even-better-toml
         rust-lang.rust-analyzer
         christian-kohler.path-intellisense
+        catppuccin.catppuccin-vsc
+        catppuccin.catppuccin-vsc-icons
       ];
     };
   };

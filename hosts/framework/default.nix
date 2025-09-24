@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ../../nixos
-    ../../nixos/users/astios.nix
   ];
 
   # Bootloader
@@ -12,33 +11,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
-  networking.hostName = "astios-nixos";
+  networking.hostName = "framework-nixos";
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
   services.printing.enable = true;
 
-  # System packages
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-    tree
-    htop
-    unzip
-    zip
-  ];
-
-  # Enable the X11 windowing system.
-  services.xserver = {
+  # Tailscale
+  services.tailscale = {
     enable = true;
-    xkb = {
-      layout = "fr";
-      variant = "";
-    };
+    useRoutingFeatures = "client";
   };
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
 
   # Battery life
   services.tlp.enable = true;
