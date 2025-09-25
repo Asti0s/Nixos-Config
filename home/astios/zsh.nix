@@ -9,7 +9,6 @@
       enable = true;
       plugins = [
         "git"
-        "history-substring-search"
         "docker"
         "docker-compose"
         "npm"
@@ -23,7 +22,6 @@
       enable = true;
       strategy = [
         "history"
-        "completion"
       ];
     };
   };
