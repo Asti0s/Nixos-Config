@@ -1,5 +1,12 @@
 { pkgs, ... }:
-
+let
+  grubTheme = pkgs.fetchFromGitHub {
+    owner = "Lxtharia";
+    repo = "minegrub-world-sel-theme";
+    rev = "00254ae5e1836ede1ad502b74dac162eab8eebe2";
+    hash = "sha256-X3AevoAmeyAAWkofXhK8vkfFO7lUSct0sAyKQ5MD6ak=";
+  };
+in
 {
   # Fonts
   fonts = {
@@ -11,6 +18,12 @@
       liberation_ttf
       noto-fonts-color-emoji
     ];
+  };
+
+  # Minegrub theme
+  boot.loader.grub = {
+    gfxmodeEfi = "1920x1080x32";
+    theme = "${grubTheme}/minegrub-world-selection";
   };
 
   # Enable the GNOME Desktop Environment.
