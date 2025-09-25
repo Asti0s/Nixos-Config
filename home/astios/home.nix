@@ -28,10 +28,6 @@
     nixfmt-rfc-style
     nixd
 
-    # Programs
-    unzip
-    zip
-
     # Softwares
     anki
     qbittorrent
