@@ -115,6 +115,12 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ether-metamask/latest.xpi";
             installation_mode = "normal_installed";
           };
+
+          # Catpuccin theme
+          "{d49033ac-8969-488c-afb0-5cdb73957f41}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-macchiato-blue/latest.xpi";
+            installation_mode = "normal_installed";
+          };
         };
       };
     };
