@@ -2,9 +2,10 @@
 
 {
   imports = [
+    ./vscode.nix
+    ./dev.nix
     ./firefox.nix
     ./discord.nix
-    ./vscode.nix
     ./kitty.nix
     ./zsh.nix
     ./fonts.nix
@@ -14,7 +15,7 @@
 
   home.username = "astios";
   home.homeDirectory = "/home/astios";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   # Gnome natural scrolling
   dconf.settings = {
@@ -25,12 +26,14 @@
 
   # Packages
   home.packages = with pkgs; [
-    nixfmt-rfc-style
-    nixd
+    # Programs
+    wget
+    curl
+    tree
+    htop
 
     # Softwares
     anki
     qbittorrent
-    wechat
   ];
 }

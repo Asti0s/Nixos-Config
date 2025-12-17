@@ -1,13 +1,8 @@
 { pkgs, ... }:
-let
-  grubTheme = pkgs.fetchFromGitHub {
-    owner = "Lxtharia";
-    repo = "minegrub-world-sel-theme";
-    rev = "00254ae5e1836ede1ad502b74dac162eab8eebe2";
-    hash = "sha256-X3AevoAmeyAAWkofXhK8vkfFO7lUSct0sAyKQ5MD6ak=";
-  };
-in
 {
+  # Timezone
+  time.timeZone = "Asia/Shanghai";
+
   # Fonts
   fonts = {
     enableDefaultPackages = true;
@@ -20,10 +15,16 @@ in
     ];
   };
 
-  # Minegrub theme
-  boot.loader.grub = {
-    gfxmodeEfi = "1920x1080x32";
-    theme = "${grubTheme}/minegrub-world-selection";
+  # Tsinghua mirror
+  nix.settings.substituters = [
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    "https://cache.nixos.org"
+  ];
+
+  # Tailscale
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
   };
 
   # Enable the GNOME Desktop Environment.
@@ -39,11 +40,6 @@ in
     };
   };
 
-  # Opengl support
-  hardware.graphics = {
-    enable = true;
-  };
-
   # Steam
   programs.steam = {
     enable = true;
@@ -52,19 +48,13 @@ in
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  # System packages
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-    tree
-    htop
-  ];
-
   # Zsh
   programs.zsh.enable = true;
 
+  # User
   users.users.astios = {
     shell = pkgs.zsh;
+    useDefaultShell = true;
     isNormalUser = true;
     description = "Astios";
     extraGroups = [

@@ -1,3 +1,12 @@
+{ pkgs, ... }:
+let
+  grubTheme = pkgs.fetchFromGitHub {
+    owner = "Lxtharia";
+    repo = "minegrub-world-sel-theme";
+    rev = "00254ae5e1836ede1ad502b74dac162eab8eebe2";
+    hash = "sha256-X3AevoAmeyAAWkofXhK8vkfFO7lUSct0sAyKQ5MD6ak=";
+  };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -12,7 +21,14 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
+      gfxmodeEfi = "1920x1080x32";
+      theme = "${grubTheme}/minegrub-world-selection";
     };
+  };
+
+  # Opengl support
+  hardware.graphics = {
+    enable = true;
   };
 
   # Networking
@@ -20,12 +36,6 @@
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
   services.printing.enable = true;
-
-  # Tailscale
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-  };
 
   # Battery life
   services.tlp.enable = true;
@@ -41,5 +51,5 @@
     pulse.enable = true;
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

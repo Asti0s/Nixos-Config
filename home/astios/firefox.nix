@@ -36,12 +36,14 @@
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "normal_installed";
+            private_browsing = true;
           };
 
           # Privacy Badger:
           "jid1-MnnxcxisBPnSXQ@jetpack" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
             installation_mode = "normal_installed";
+            private_browsing = true;
           };
 
           # Dashlane
@@ -84,18 +86,14 @@
           "{74145f27-f039-47ce-a470-a662b129930a}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
             installation_mode = "normal_installed";
-          };
-
-          # LeechBlock
-          "leechblockng@proginosko.com" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/leechblock-ng/latest.xpi";
-            installation_mode = "normal_installed";
+            private_browsing = true;
           };
 
           # Consent-O-Matic
           "gdpr@cavi.au.dk" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi";
             installation_mode = "normal_installed";
+            private_browsing = true;
           };
 
           # Hide youtube shorts

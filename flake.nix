@@ -1,6 +1,11 @@
 {
   description = "NixOS configuration";
 
+  nixConfig.extra-substituters = [
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    "https://cache.nixos.org"
+  ];
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {

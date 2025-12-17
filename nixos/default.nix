@@ -5,9 +5,8 @@
     "flakes"
   ];
 
-  # Locales / Timezone
+  # Locales
   console.keyMap = "fr";
-  time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "fr_FR.UTF-8";
