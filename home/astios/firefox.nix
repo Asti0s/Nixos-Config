@@ -10,6 +10,7 @@
       profiles.default = {
         settings = {
           "browser.aboutConfig.showWarning" = false;
+          "xpinstall.signatures.required" = false;
         };
       };
 
@@ -28,6 +29,7 @@
         DisableFirefoxAccounts = true;
         DisableAccounts = true;
         DontCheckDefaultBrowser = true;
+        AppAutoUpdate = true;
 
         # ---- EXTENSIONS ----
         # Check about:support for extension/add-on ID strings.

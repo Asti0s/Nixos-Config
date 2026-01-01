@@ -33,6 +33,7 @@
         catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
         prisma.prisma
+        ms-vscode.makefile-tools
       ];
     };
   };

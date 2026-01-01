@@ -13,5 +13,6 @@
     podman-desktop
     nixfmt-rfc-style
     nixd
+    clang-tools
   ];
 }
