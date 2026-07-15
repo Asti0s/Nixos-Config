@@ -6,12 +6,7 @@
   ];
 
   home.packages = with pkgs; [
-    bun
-    prisma
-    podman
-    podman-compose
-    podman-desktop
-    nixfmt-rfc-style
+    nixfmt
     nixd
     clang-tools
   ];

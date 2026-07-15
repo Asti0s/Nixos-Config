@@ -31,9 +31,19 @@
     curl
     tree
     htop
+    rar
+    zip
+    unzip
+    python315
 
     # Softwares
     anki
     qbittorrent
+    tor-browser
+    veracrypt
+    telegram-desktop
+    ckan
+    rclone
+    obsidian
   ];
 }

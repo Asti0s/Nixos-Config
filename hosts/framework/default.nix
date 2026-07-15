@@ -26,6 +26,12 @@ in
     };
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+  ];
+
   # Opengl support
   hardware.graphics = {
     enable = true;
@@ -34,6 +40,7 @@ in
   # Networking
   networking.hostName = "framework-nixos";
   networking.networkmanager.enable = true;
+  networking.firewall.trustedInterfaces = [ "docker0" ];
   hardware.bluetooth.enable = true;
   services.printing.enable = true;
 

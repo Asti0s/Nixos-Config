@@ -15,6 +15,16 @@
         "workbench.colorTheme" = "Catppuccin Macchiato";
         "workbench.iconTheme" = "catppuccin-macchiato";
         "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        "github.copilot.enable" = {
+          "*" = true;
+          "plaintext" = true;
+          "markdown" = true;
+        };
+        "clangd.arguments" = [
+          "--clang-tidy"
+          "--background-index"
+        ];
+        "chat.mcp.gallery.enabled" = true;
       };
 
       extensions = with pkgs.vscode-extensions; [
@@ -23,8 +33,6 @@
         github.copilot
         github.copilot-chat
         llvm-vs-code-extensions.vscode-clangd
-        ms-vscode.cpptools-extension-pack
-        ms-azuretools.vscode-docker
         esbenp.prettier-vscode
         dbaeumer.vscode-eslint
         tamasfe.even-better-toml
@@ -33,7 +41,13 @@
         catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
         prisma.prisma
+        ms-vscode.cpptools-extension-pack
         ms-vscode.makefile-tools
+        ms-azuretools.vscode-docker
+        ms-azuretools.vscode-containers
+        ms-vscode.cmake-tools
+        svelte.svelte-vscode
+        bradlc.vscode-tailwindcss
       ];
     };
   };
